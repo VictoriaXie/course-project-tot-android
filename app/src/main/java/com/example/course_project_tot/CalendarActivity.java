@@ -29,7 +29,6 @@ public class CalendarActivity extends AppCompatActivity {
 
         curDate = LocalDate.now();
 
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
@@ -53,8 +52,8 @@ public class CalendarActivity extends AppCompatActivity {
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO: Create clock activity
-                        System.out.println(textView.getText().toString());
+                        Intent intent = new Intent(CalendarActivity.this, Pomodoro.class);
+                        startActivity(intent);
                     }
                 });
                 scrollLinearLayout.addView(textView);

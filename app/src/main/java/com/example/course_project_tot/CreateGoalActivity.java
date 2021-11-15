@@ -46,7 +46,7 @@ public class CreateGoalActivity extends AppCompatActivity implements CreateGoalP
         } else {
             Goal goal = new Goal.Builder(name).build();
             presenter.addGoal(date, goal);
-            Intent intent = new Intent(this, Pomodoro.class);
+            Intent intent = new Intent(this, CalendarActivity.class);
             startActivity(intent);
             finish();
         }
