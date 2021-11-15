@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.course_project_tot.CalendarActivity"/>
+        <activity android:name="com.example.course_project_tot.CreateGoalActivity"/>
     </application>
-
 </manifest>

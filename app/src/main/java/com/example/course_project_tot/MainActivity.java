@@ -1,5 +1,6 @@
 package com.example.course_project_tot;
 
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity  implements ILoginView {
     @Override
     public void OnLoginSuccess(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,CalendarActivity.class);
+        startActivity(intent);
     }
     @Override
     public void OnLoginError(String message) {
