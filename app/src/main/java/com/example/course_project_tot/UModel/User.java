@@ -38,5 +38,3 @@ public class User implements IUser {
             return -1;
     }
 }
-
-
