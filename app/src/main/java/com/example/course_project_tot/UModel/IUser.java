@@ -5,3 +5,6 @@ public interface IUser {
     String getPassword();
     int isValid();
 }
+
+
+
