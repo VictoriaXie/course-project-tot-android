@@ -13,14 +13,25 @@ public class PomodoroModel {
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
+    /**
+     * Turn on the Pomodoro Timer.
+     */
     public void turnOn(){
         mTimerRunning = true;
     }
+
+    /**
+     * Turn off the Pomodoro Timer.
+     */
 
     public void turnOff(){
         mTimerRunning = false;
     }
 
+    /**
+     * Return the status of the Pomodoro Timer (Whether it's running or not).
+     @return True if the timer is running.
+     */
     public boolean getStatus(){
         return mTimerRunning;
     }
