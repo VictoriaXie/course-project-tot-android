@@ -26,6 +26,14 @@ public class PomodoroController extends AppCompatActivity {
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
+
+    /**
+     * Setup the view and display it on an android app for the Pomodoro Timer.
+     * Start the timer by clicking the start button.
+     * Once the Timer starts counting down, the start button will be invisible and the pause button
+     * will appear, and we can pause the Timer by clicking the Pause button.
+     * Reset the Timer by clicking the reset button.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,9 @@ public class PomodoroController extends AppCompatActivity {
         updateCountDownText();
     }
 
+    /**
+     * Start the Pomodoro Timer.
+     */
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -79,6 +90,9 @@ public class PomodoroController extends AppCompatActivity {
 
     }
 
+    /**
+     * Pause the Pomodoro Timer.
+     */
     private void pauseTimer() {
         mCountDownTimer.cancel();
         pomodoro.turnOff();
@@ -87,6 +101,9 @@ public class PomodoroController extends AppCompatActivity {
 
     }
 
+    /**
+     * Reset the Pomodoro Timer.
+     */
     private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
@@ -95,6 +112,9 @@ public class PomodoroController extends AppCompatActivity {
 
     }
 
+    /**
+     * Update the time displayed in the Pomodoro Timer.
+     */
     private void updateCountDownText() {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
