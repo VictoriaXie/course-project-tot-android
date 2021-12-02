@@ -3,12 +3,21 @@ package com.example.course_project_tot.UModel;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.example.course_project_tot.Goal;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class User implements IUser {
     private String email, password;
+    public Map<LocalDate, List<Goal>> goals = new HashMap<>();
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.goals = new HashMap<>();
     }
 
     @Override
