@@ -1,5 +1,6 @@
 package com.example.course_project_tot;
 
+import android.widget.EditText;
 import com.example.course_project_tot.Ucontroller.LoginController;
 
 import java.time.LocalDate;
@@ -17,7 +18,18 @@ public class CreateGoalPresenter {
         view.updateDate(date);
     }
 
-    public void addGoal(LocalDate date, Goal goal) {
+    public void addGoal(LocalDate date, EditText nameText, EditText descriptionText, EditText numHoursText) {
+        String name = nameText.getText().toString();
+        String description = descriptionText.getText().toString();
+        String numHours = numHoursText.getText().toString();
+        int hours = 1;
+        if (name.isEmpty()) {
+            view.setNameError("Name cannot be empty");
+        }
+        if (!numHours.isEmpty()) {
+            hours = Integer.parseInt(numHours);
+        }
+        Goal goal = new Goal.Builder(name).description(description).timeRequired(hours).date(date).build();
         if (LoginController.activeUser.goals.containsKey(date)) {
             LoginController.activeUser.goals.get(date).add(goal);
         } else {
@@ -29,6 +41,7 @@ public class CreateGoalPresenter {
 
     public interface View {
         void updateDate(LocalDate date);
+        void setNameError(String error);
     }
 }
 
