@@ -24,11 +24,13 @@ public class User implements IUser, Serializable {
 
     @Override
     public String getEmail() {
+
         return email;
     }
 
     @Override
     public String getPassword() {
+
         return password;
     }
 
