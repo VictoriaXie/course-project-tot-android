@@ -3,15 +3,28 @@ package com.example.course_project_tot.UModel;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-public class User implements IUser {
+import com.example.course_project_tot.Goal;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class User implements IUser, Serializable {
     private String email, password;
+    public Map<LocalDate, List<Goal>> goals = new HashMap<>();
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.goals = new HashMap<>();
     }
 
     @Override
+    /**
+     *
+     */
     public String getEmail() {
         return email;
     }
