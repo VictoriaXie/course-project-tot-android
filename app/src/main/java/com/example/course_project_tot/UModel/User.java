@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class User implements IUser, Serializable {
     private String email, password;
-    public Map<LocalDate, List<Goal>> goals = new HashMap<>();
+    public Map<LocalDate, List<Goal>> goals;
 
     public User(String email, String password) {
         this.email = email;
@@ -22,9 +22,6 @@ public class User implements IUser, Serializable {
     }
 
     @Override
-    /**
-     *
-     */
     public String getEmail() {
         return email;
     }
