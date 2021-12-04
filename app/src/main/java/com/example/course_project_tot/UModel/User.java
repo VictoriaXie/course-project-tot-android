@@ -5,12 +5,13 @@ import android.util.Patterns;
 
 import com.example.course_project_tot.Goal;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class User implements IUser {
+public class User implements IUser, Serializable {
     private String email, password;
     public Map<LocalDate, List<Goal>> goals = new HashMap<>();
 
@@ -21,6 +22,9 @@ public class User implements IUser {
     }
 
     @Override
+    /**
+     *
+     */
     public String getEmail() {
         return email;
     }
