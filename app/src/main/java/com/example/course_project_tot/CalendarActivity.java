@@ -6,17 +6,13 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.course_project_tot.Ucontroller.LoginController;
 import com.example.course_project_tot.Ucontroller.PomodoroController;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CalendarActivity extends AppCompatActivity {
-    //TODO: Move to user
-    public static Map<LocalDate, List<Goal>> goals = new HashMap<>();
-
     private LocalDate curDate;
 
     private LinearLayout scrollLinearLayout;
@@ -46,8 +42,8 @@ public class CalendarActivity extends AppCompatActivity {
      */
     public void updateGoals(LocalDate date) {
         scrollLinearLayout.removeAllViews();
-        if (goals.containsKey(curDate)) {
-            List<Goal> goalsOnDate = goals.get(curDate);
+        if (LoginController.activeUser.goals.containsKey(curDate)) {
+            List<Goal> goalsOnDate = LoginController.activeUser.goals.get(curDate);
             for (int i = 0; i < goalsOnDate.size(); i++) {
                 TextView textView = new TextView(this);
                 textView.setText(goalsOnDate.get(i).getName());

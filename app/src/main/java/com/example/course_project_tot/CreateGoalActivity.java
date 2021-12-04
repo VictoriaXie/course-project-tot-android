@@ -32,28 +32,28 @@ public class CreateGoalActivity extends AppCompatActivity implements CreateGoalP
 
     /**
      * On click listener for "Create Goals" button. A goal is created with values from the text fields
-     * and added to the list of goals.
+     * and added to the list of goals of the current user.
      * @param view Object that triggered the event.
      */
     public void createGoal(View view) {
-        // TODO: Add rest of fields
         EditText nameText = findViewById(R.id.editTextName);
         EditText descriptionText = findViewById(R.id.editTextDescription);
+        EditText numHoursText = findViewById(R.id.editTextNumberHours);
 
-        String name = nameText.getText().toString();
-        if (name.isEmpty()) {
-            nameText.setError("Name is required");
-        } else {
-            Goal goal = new Goal.Builder(name).build();
-            presenter.addGoal(date, goal);
-            Intent intent = new Intent(this, CalendarActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        presenter.addGoal(date, nameText, descriptionText, numHoursText);
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void updateDate(LocalDate date) {
         dateText.setText(date.toString());
+    }
+
+    @Override
+    public void setNameError(String error) {
+        EditText nameText = findViewById(R.id.editTextName);
+        nameText.setError(error);
     }
 }

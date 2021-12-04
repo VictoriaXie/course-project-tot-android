@@ -1,12 +1,13 @@
 package com.example.course_project_tot;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.UUID;
 
 public class Goal{
     private String id;
     private String name;
-    private Calendar date;
+    private LocalDate date;
     private String description;
     private int timeRequired;
     private int priority;
@@ -28,7 +29,7 @@ public class Goal{
         return name;
     }
 
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -47,7 +48,7 @@ public class Goal{
     public static class Builder {
         private String id;
         private String name;
-        private Calendar date;
+        private LocalDate date;
         private String description;
         private int timeRequired;
         private int priority;
@@ -57,7 +58,7 @@ public class Goal{
             this.name = name;
         }
 
-        public Builder date(Calendar date) {
+        public Builder date(LocalDate date) {
             this.date = date;
             return this;
         }
