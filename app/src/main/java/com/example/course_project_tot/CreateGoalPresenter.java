@@ -1,5 +1,7 @@
 package com.example.course_project_tot;
 
+import com.example.course_project_tot.Ucontroller.LoginController;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +18,12 @@ public class CreateGoalPresenter {
     }
 
     public void addGoal(LocalDate date, Goal goal) {
-        if (CalendarActivity.goals.containsKey(date)) {
-            CalendarActivity.goals.get(date).add(goal);
+        if (LoginController.activeUser.goals.containsKey(date)) {
+            LoginController.activeUser.goals.get(date).add(goal);
         } else {
             List<Goal> goals = new ArrayList<>();
             goals.add(goal);
-            CalendarActivity.goals.put(date, goals);
+            LoginController.activeUser.goals.put(date, goals);
         }
     }
 
