@@ -24,6 +24,5 @@ public class UserList implements Serializable {
     public User getUser(String email) {
         return users.get(email);
     }
-
 }
 
