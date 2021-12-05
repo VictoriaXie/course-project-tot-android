@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.course_project_tot.Ucontroller.ILoginController;
-import com.example.course_project_tot.Ucontroller.LoginController;
-import com.example.course_project_tot.UView.ILoginView;
+import com.example.course_project_tot.Controller.ILoginController;
+import com.example.course_project_tot.Controller.LoginController;
+import com.example.course_project_tot.View.ILoginView;
 public class MainActivity extends AppCompatActivity  implements ILoginView {
     EditText email,password;
     Button loginb;

@@ -1,8 +1,8 @@
-package com.example.course_project_tot.Ucontroller;
+package com.example.course_project_tot.Controller;
 
-import com.example.course_project_tot.UModel.User;
-import com.example.course_project_tot.UModel.UserList;
-import com.example.course_project_tot.UView.ILoginView;
+import com.example.course_project_tot.Modele.User;
+import com.example.course_project_tot.Modele.UserList;
+import com.example.course_project_tot.View.ILoginView;
 
 public class LoginController implements ILoginController {
     ILoginView loginView;

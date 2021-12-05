@@ -1,4 +1,4 @@
-package com.example.course_project_tot.UModel;
+package com.example.course_project_tot.Modele;
 
 import java.io.Serializable;
 import java.util.HashMap;
