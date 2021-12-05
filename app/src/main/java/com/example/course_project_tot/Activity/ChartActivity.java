@@ -1,14 +1,16 @@
-package com.example.course_project_tot;
+package com.example.course_project_tot.Activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.course_project_tot.DataMap;
+import com.example.course_project_tot.FromJSon;
+import com.example.course_project_tot.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.Arrays;
 
 public class ChartActivity extends AppCompatActivity {
 
@@ -20,9 +22,10 @@ public class ChartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // on below line we are initializing our graph view.
         graphView = findViewById(R.id.idGraphView);
-        // on below line we are adding data to our graph view.
+        for (DataMap d : FromJSon.returnFromJson()) {
+            System.out.println(d);
+        }
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                 // on below line we are adding
                 // each point on our x and y axis.
@@ -36,17 +39,13 @@ public class ChartActivity extends AppCompatActivity {
                 new DataPoint(7, 1),
                 new DataPoint(8, 2)
         });
-        // after adding data to our line graph series.
-        // on below line we are setting
-        // title for our graph view.
+
         graphView.setTitle("My Graph View");
 
-        // on below line we are setting
-        // text color to our graph view.
+
         graphView.setTitleColor(R.color.purple_200);
 
-        // on below line we are setting
-        // our title text size.
+
         graphView.setTitleTextSize(18);
 
         // on below line we are adding

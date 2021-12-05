@@ -9,20 +9,9 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-
-class User {
-
-    private final String firstName;
-    private final String lastName;
-
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
 public class FromJSon {
-    public void main(String[] args) throws IOException {
+    public static DataMap[] returnFromJson() {
 
         Gson gson = new GsonBuilder().create();
 
@@ -32,12 +21,12 @@ public class FromJSon {
         try (Reader reader = Files.newBufferedReader(path,
                 StandardCharsets.UTF_8)) {
 
-            User[] users = gson.fromJson(reader, User[].class);
+            return gson.fromJson(reader, DataMap[].class);
 
-            Arrays.stream(users).forEach(e -> {
-                System.out.println(e);
-            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-}}
+}
