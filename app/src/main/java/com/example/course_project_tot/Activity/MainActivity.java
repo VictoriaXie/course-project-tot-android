@@ -1,4 +1,4 @@
-package com.example.course_project_tot;
+package com.example.course_project_tot.Activity;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.course_project_tot.Activity.CalendarActivity;
 import com.example.course_project_tot.Controller.ILoginController;
 import com.example.course_project_tot.Controller.LoginController;
+import com.example.course_project_tot.R;
 import com.example.course_project_tot.View.ILoginView;
 public class MainActivity extends AppCompatActivity  implements ILoginView {
     EditText email,password;
