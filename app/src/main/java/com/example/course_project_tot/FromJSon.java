@@ -9,9 +9,10 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import com.jjoe64.graphview.series.DataPoint;
 
 public class FromJSon {
-    public static DataMap[] returnFromJson() {
+    public static DataPoint[] returnFromJson() {
 
         Gson gson = new GsonBuilder().create();
 
@@ -21,7 +22,7 @@ public class FromJSon {
         try (Reader reader = Files.newBufferedReader(path,
                 StandardCharsets.UTF_8)) {
 
-            return gson.fromJson(reader, DataMap[].class);
+            return gson.fromJson(reader, DataPoint[].class);
 
         } catch (IOException e) {
             e.printStackTrace();
