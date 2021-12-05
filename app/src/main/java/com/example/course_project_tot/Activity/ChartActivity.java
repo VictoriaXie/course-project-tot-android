@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.course_project_tot.DataMap;
 import com.example.course_project_tot.FromJSon;
 import com.example.course_project_tot.R;
 import com.jjoe64.graphview.GraphView;
