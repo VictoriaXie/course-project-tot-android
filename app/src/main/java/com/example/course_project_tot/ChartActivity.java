@@ -8,6 +8,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.Arrays;
+
 public class ChartActivity extends AppCompatActivity {
 
     // creating a variable
