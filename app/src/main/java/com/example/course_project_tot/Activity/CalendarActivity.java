@@ -1,4 +1,4 @@
-package com.example.course_project_tot;
+package com.example.course_project_tot.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.course_project_tot.Controller.LoginController;
-import com.example.course_project_tot.Activity.PomodoroActivity;
+import com.example.course_project_tot.Goal;
+import com.example.course_project_tot.R;
 
 import java.time.LocalDate;
 import java.util.List;

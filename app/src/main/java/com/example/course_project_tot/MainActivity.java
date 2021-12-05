@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.course_project_tot.Activity.CalendarActivity;
 import com.example.course_project_tot.Controller.ILoginController;
 import com.example.course_project_tot.Controller.LoginController;
 import com.example.course_project_tot.View.ILoginView;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity  implements ILoginView {
     @Override
     public void OnLoginSuccess(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this,CalendarActivity.class);
+        Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
     @Override

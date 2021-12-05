@@ -1,4 +1,4 @@
-package com.example.course_project_tot;
+package com.example.course_project_tot.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.course_project_tot.Activity.CalendarActivity;
+import com.example.course_project_tot.CreateGoalPresenter;
+import com.example.course_project_tot.R;
+
 import java.time.LocalDate;
 
-public class CreateGoalActivity extends AppCompatActivity implements CreateGoalPresenter.View{
+public class CreateGoalActivity extends AppCompatActivity implements CreateGoalPresenter.View {
     private CreateGoalPresenter presenter;
     private LocalDate date;
 
