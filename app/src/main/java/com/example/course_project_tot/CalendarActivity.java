@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.course_project_tot.Ucontroller.LoginController;
-import com.example.course_project_tot.Ucontroller.PomodoroController;
+import com.example.course_project_tot.Controller.LoginController;
+import com.example.course_project_tot.Activity.PomodoroActivity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -50,7 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(CalendarActivity.this, PomodoroController.class);
+                        Intent intent = new Intent(CalendarActivity.this, PomodoroActivity.class);
                         startActivity(intent);
                     }
                 });

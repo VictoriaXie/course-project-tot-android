@@ -1,4 +1,4 @@
-package com.example.course_project_tot.Ucontroller;
+package com.example.course_project_tot.Activity;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.course_project_tot.R;
-import com.example.course_project_tot.UModel.PomodoroModel;
+import com.example.course_project_tot.Modele.PomodoroModel;
 
 import java.util.Locale;
 
-public class PomodoroController extends AppCompatActivity {
+public class PomodoroActivity extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 1200000;
 
     private TextView mTextViewCountDown;
@@ -22,7 +22,7 @@ public class PomodoroController extends AppCompatActivity {
     private Button mButtonReset;
 
     private CountDownTimer mCountDownTimer;
-    private PomodoroModel pomodoro = new PomodoroModel();
+    private PomodoroModel pomodoro = new PomodoroModel(60);
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
