@@ -13,7 +13,7 @@ import com.example.course_project_tot.Controller.ILoginController;
 import com.example.course_project_tot.Controller.LoginController;
 import com.example.course_project_tot.R;
 import com.example.course_project_tot.View.ILoginView;
-public class MainActivity extends AppCompatActivity  implements ILoginView {
+public class UserActivity extends AppCompatActivity  implements ILoginView {
     EditText email,password;
     Button loginb;
     ILoginController loginPresenter;
