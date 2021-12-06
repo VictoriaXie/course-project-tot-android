@@ -15,7 +15,10 @@ public class User implements IUser, Serializable {
     private final String email;
     private final String password;
     public Map<LocalDate, List<Goal>> goals;
-
+    /**
+     * Setup the user's email, password and their goals.
+     *
+     */
     public User(String email, String password) {
         this.email = email;
         this.password = password;
