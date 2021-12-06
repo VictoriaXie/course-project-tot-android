@@ -3,19 +3,21 @@ package com.example.course_project_tot.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.course_project_tot.Controller.PomodoroController;
 import com.example.course_project_tot.R;
 import com.example.course_project_tot.Modele.PomodoroModel;
 
 import java.util.Locale;
 
 public class PomodoroActivity extends AppCompatActivity {
-    private static final long START_TIME_IN_MILLIS = 1200000;
+    private static final long START_TIME_IN_MILLIS = 1200;
 
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
@@ -38,11 +40,14 @@ public class PomodoroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
+        PomodoroController controller = new PomodoroController(findViewById(R.id.button_start_pause), findViewById(R.id.button_reset));
+
 
         mTextViewCountDown = findViewById(R.id.textView_view_countdown);
 
-        mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
+        mButtonStartPause = controller.getmButtonStartPause();
+        mButtonReset = controller.getmButtonReset();
+        Button mButtonBack = findViewById(R.id.button_back);
 
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +67,21 @@ public class PomodoroActivity extends AppCompatActivity {
             }
         });
         updateCountDownText();
+
+        mButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BackToCalendar();
+            }
+        });
+    }
+
+    /**
+     * Back to calendar from Pomodoro Timer.
+     */
+    private void BackToCalendar(){
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -80,7 +100,9 @@ public class PomodoroActivity extends AppCompatActivity {
                 pomodoro.turnOff();
                 mButtonStartPause.setText("Start");
                 mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
+                mButtonReset.setVisibility(View.INVISIBLE);
+                mTextViewCountDown.setTextSize(30);
+                mTextViewCountDown.setText("Congratulations! Please press back to the calendar");
             }
         }.start();
 
