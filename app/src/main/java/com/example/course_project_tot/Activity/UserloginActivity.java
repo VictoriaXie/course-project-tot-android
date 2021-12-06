@@ -28,7 +28,7 @@ public class UserloginActivity extends AppCompatActivity  implements ILoginView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         email = (EditText) findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         loginb = (Button) findViewById(R.id.loginb);
