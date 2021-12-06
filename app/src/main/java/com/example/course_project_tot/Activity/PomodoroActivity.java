@@ -4,6 +4,7 @@ package com.example.course_project_tot.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -20,6 +21,7 @@ public class PomodoroActivity extends AppCompatActivity {
     private TextView mTextViewCountDown;
     private TextView statusView;
     private Button mButtonStartPauseSkip;
+    private MediaPlayer mysong;
 
     private CountDownTimer mCountDownTimer;
 
@@ -42,11 +44,10 @@ public class PomodoroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
-
-
+        
+        mysong = MediaPlayer.create(PomodoroActivity.this,R.raw.relaxing);
         mTextViewCountDown = findViewById(R.id.textView_view_countdown);
         statusView = findViewById(R.id.textView_status);
-
         mButtonStartPauseSkip = findViewById(R.id.button_start_pause);
         Button mButtonBack = findViewById(R.id.button_back);
 
@@ -61,6 +62,17 @@ public class PomodoroActivity extends AppCompatActivity {
         updateCountDownText(mTimeLeftInMillis);
 
         mButtonBack.setOnClickListener(view -> BackToCalendar());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mysong.release();
+    }
+
+    public void playIT(View v){
+        mysong.start();
+
     }
 
     /**
