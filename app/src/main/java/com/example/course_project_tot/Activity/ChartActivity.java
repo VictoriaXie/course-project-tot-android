@@ -42,6 +42,6 @@ public class ChartActivity extends AppCompatActivity {
         // data series to our graph view.
         graphView.addSeries(series);
 
-    }
+     }
 
 }
