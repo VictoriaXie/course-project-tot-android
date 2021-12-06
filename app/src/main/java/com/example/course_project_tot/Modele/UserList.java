@@ -33,29 +33,8 @@ public class UserList implements Serializable {
     public User getUser(String email) {
         return users.get(email);
     }
+
+    public boolean contains(String email) {
+        return users.containsKey(email);
+    }
 }
-
-class GsonWriteList {
-
-    public static void main(String[] args) throws IOException {
-
-        String fileName = "src/main/resources/items.json";
-
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             OutputStreamWriter isr = new OutputStreamWriter(fos,
-                     StandardCharsets.UTF_8)) {
-
-            Gson gson = new Gson();
-
-            UserList item1 = new UserList();
-            UserList item2 = new UserList();
-            UserList item3 = new UserList();
-
-            List<UserList> items = new ArrayList<>();
-            items.add(item1);
-            items.add(item2);
-            items.add(item3);
-
-            gson.toJson(items, isr);
-        }
-    }}
