@@ -13,10 +13,19 @@ import com.example.course_project_tot.Controller.ILoginController;
 import com.example.course_project_tot.Controller.LoginController;
 import com.example.course_project_tot.R;
 import com.example.course_project_tot.View.ILoginView;
+
 public class UserloginActivity extends AppCompatActivity  implements ILoginView {
     EditText email,password;
     Button loginb;
     ILoginController loginPresenter;
+
+    /**
+     * Setup the view and display on android app for User login part.
+     *
+     * Once the Timer starts counting down, the start button will be invisible and the pause button
+     * will appear, and we can pause the Timer by clicking the Pause button.
+     * Reset the Timer by clicking the reset button.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
