@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.course_project_tot.CalendarPresenter;
 import com.example.course_project_tot.Controller.LoginController;
 import com.example.course_project_tot.Goal;
 import com.example.course_project_tot.R;
@@ -13,7 +14,9 @@ import com.example.course_project_tot.R;
 import java.time.LocalDate;
 import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity implements CalendarPresenter.View {
+    private CalendarPresenter presenter;
+
     private LocalDate curDate;
 
     private LinearLayout scrollLinearLayout;
@@ -24,17 +27,18 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        presenter = new CalendarPresenter(this);
+
         CalendarView calendarView = findViewById(R.id.calendarView);
         Button createGoalButton = findViewById(R.id.createGoalButton);
         scrollLinearLayout = findViewById(R.id.ll);
-
         curDate = LocalDate.now();
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
                 curDate = LocalDate.of(year, month, day);
-                updateGoals(curDate);
+                presenter.updateGoalList(curDate);
             }
         });
         find = (Button) findViewById(R.id.button2);
@@ -44,27 +48,24 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Updates the list of goals for the current date.
-     * @param date Date goals should be on.
-     */
-    public void updateGoals(LocalDate date) {
-        scrollLinearLayout.removeAllViews();
-        if (LoginController.activeUser.goals.containsKey(curDate)) {
-            List<Goal> goalsOnDate = LoginController.activeUser.goals.get(curDate);
-            for (int i = 0; i < goalsOnDate.size(); i++) {
-                TextView textView = new TextView(this);
-                textView.setText(goalsOnDate.get(i).getName());
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(CalendarActivity.this, PomodoroActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                scrollLinearLayout.addView(textView);
+    @Override
+    public void addGoalToList(String id, String name) {
+        TextView textView = new TextView(this);
+        textView.setText(name);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, PomodoroActivity.class);
+                intent.putExtra("goalId", id);
+                startActivity(intent);
             }
-        }
+        });
+        scrollLinearLayout.addView(textView);
+    }
+
+    @Override
+    public void clearGoalList(){
+        scrollLinearLayout.removeAllViews();
     }
 
     /**
