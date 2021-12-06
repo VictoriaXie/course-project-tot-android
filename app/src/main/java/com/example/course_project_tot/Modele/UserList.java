@@ -1,10 +1,10 @@
 package com.example.course_project_tot.Modele;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.File;
@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,8 @@ public class UserList {
             instance = new UserList();
             if (FILE_PATH.exists()) { // Reads users from file if it exists
                 try {
-                    Gson gson = new Gson();
+                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                            .create();
                     JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
                     Type type = new TypeToken<Map<String, User>>() {}.getType(); // Makes sure json is deserialized as a map with User and not generic objects
                     users = gson.fromJson(reader, type);
@@ -78,7 +81,8 @@ public class UserList {
 
     public void writeToFile() {
         try {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                    .create();
             JsonWriter writer = new JsonWriter(new FileWriter(FILE_PATH));
 
             gson.toJson(users, Map.class, writer);
@@ -88,5 +92,17 @@ public class UserList {
             // Should also never happen, file path should always be valid
             throw new RuntimeException(e);
         }
+    }
+}
+
+class LocalDateAdapter extends TypeAdapter<LocalDate> {
+    @Override
+    public void write( final JsonWriter jsonWriter, final LocalDate localDate ) throws IOException {
+        jsonWriter.value(localDate.toString());
+    }
+
+    @Override
+    public LocalDate read( final JsonReader jsonReader ) throws IOException {
+        return LocalDate.parse(jsonReader.nextString());
     }
 }
