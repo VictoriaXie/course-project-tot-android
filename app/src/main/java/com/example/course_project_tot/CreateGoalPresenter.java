@@ -1,11 +1,10 @@
 package com.example.course_project_tot;
 
 import android.widget.EditText;
-import com.example.course_project_tot.Controller.LoginController;
+import com.example.course_project_tot.Modele.User;
+import com.example.course_project_tot.Modele.UserList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateGoalPresenter {
     private View view;
@@ -29,14 +28,14 @@ public class CreateGoalPresenter {
         if (!numHours.isEmpty()) {
             hours = Integer.parseInt(numHours);
         }
-        Goal goal = new Goal.Builder(name).description(description).timeRequired(hours).date(date).build();
-        if (LoginController.activeUser.goals.containsKey(date)) {
-            LoginController.activeUser.goals.get(date).add(goal);
-        } else {
-            List<Goal> goals = new ArrayList<>();
-            goals.add(goal);
-            LoginController.activeUser.goals.put(date, goals);
-        }
+        Goal goal = new Goal.Builder(name)
+                .description(description)
+                .timeRequired(hours)
+                .date(date)
+                .build();
+
+        User currentUser = UserList.getInstance().getCurrentUser();
+        currentUser.addGoal(goal);
     }
 
     public interface View {

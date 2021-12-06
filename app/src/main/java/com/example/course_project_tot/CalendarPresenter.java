@@ -2,6 +2,8 @@ package com.example.course_project_tot;
 
 import android.content.Context;
 import com.example.course_project_tot.Controller.LoginController;
+import com.example.course_project_tot.Modele.User;
+import com.example.course_project_tot.Modele.UserList;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,8 +17,9 @@ public class CalendarPresenter {
 
     public void updateGoalList(LocalDate date) {
         view.clearGoalList();
-        if (LoginController.activeUser.goals.containsKey(date)) {
-            List<Goal> goals = LoginController.activeUser.goals.get(date);
+        User currentUser = UserList.getInstance().getCurrentUser();
+        List <Goal> goals = currentUser.getGoalsByDate(date);
+        if (goals != null) {
             for (Goal goal : goals) {
                 view.addGoalToList(goal.getId(), goal.getName());
             }
