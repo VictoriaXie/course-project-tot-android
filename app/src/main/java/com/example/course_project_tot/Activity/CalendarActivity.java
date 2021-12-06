@@ -20,7 +20,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPrese
     private LocalDate curDate;
 
     private LinearLayout scrollLinearLayout;
-    private Button find;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +40,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPrese
                 presenter.updateGoalList(curDate);
             }
         });
-        find = (Button) findViewById(R.id.button2);
-        find.setOnClickListener(view -> {
-            Intent intent = new Intent(CalendarActivity.this, ChartActivity.class);
-            startActivity(intent);
-        });
+
     }
 
     @Override
@@ -75,6 +70,10 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPrese
     public void goToCreateGoal(View view) {
         Intent intent = new Intent(this, CreateGoalActivity.class);
         intent.putExtra("date", curDate);
+        startActivity(intent);
+    }
+    public void goToChart(View view) {
+        Intent intent = new Intent(this, ChartActivity.class);
         startActivity(intent);
     }
 }
