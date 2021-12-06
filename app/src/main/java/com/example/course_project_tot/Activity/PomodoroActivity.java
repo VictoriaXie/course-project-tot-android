@@ -3,6 +3,7 @@ package com.example.course_project_tot.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -15,16 +16,19 @@ import com.example.course_project_tot.Modele.PomodoroModel;
 import java.util.Locale;
 
 public class PomodoroActivity extends AppCompatActivity {
-    private static final long START_TIME_IN_MILLIS = 1200000;
 
     private TextView mTextViewCountDown;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
+    private TextView statusView;
+    private Button mButtonStartPauseSkip;
 
     private CountDownTimer mCountDownTimer;
-    private PomodoroModel pomodoro = new PomodoroModel(60);
 
-    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private final PomodoroModel pomodoro = new PomodoroModel(1,1,2);
+    private int totalTimeLeftInMillis = pomodoro.getTotalTime() * 60000;
+    private int focusingTimeInMillis = pomodoro.getFocusingTime() * 60000;
+    private int restTimeInMillis = pomodoro.getRestingTime() * 60000;
+
+    private int mTimeLeftInMillis = focusingTimeInMillis;
 
 
     /**
@@ -39,29 +43,32 @@ public class PomodoroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
 
+
         mTextViewCountDown = findViewById(R.id.textView_view_countdown);
+        statusView = findViewById(R.id.textView_status);
 
-        mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
+        mButtonStartPauseSkip = findViewById(R.id.button_start_pause);
+        Button mButtonBack = findViewById(R.id.button_back);
 
-        mButtonStartPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pomodoro.getStatus()) {
-                    pauseTimer();
-                } else {
-                    startTimer();
-                }
+        mButtonStartPauseSkip.setOnClickListener(view -> {
+            if (pomodoro.getStatus()) {
+                pauseTimer();
+            } else {
+                startTimer();
             }
         });
 
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetTimer();
-            }
-        });
-        updateCountDownText();
+        updateCountDownText(mTimeLeftInMillis);
+
+        mButtonBack.setOnClickListener(view -> BackToCalendar());
+    }
+
+    /**
+     * Back to calendar from Pomodoro Timer.
+     */
+    private void BackToCalendar(){
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -71,22 +78,53 @@ public class PomodoroActivity extends AppCompatActivity {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
+                mTimeLeftInMillis = (int) millisUntilFinished;
+                updateCountDownText(mTimeLeftInMillis);
             }
 
             @Override
             public void onFinish() {
                 pomodoro.turnOff();
-                mButtonStartPause.setText("Start");
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
+                if (totalTimeLeftInMillis > focusingTimeInMillis){
+                totalTimeLeftInMillis -= focusingTimeInMillis;
+                mTimeLeftInMillis = focusingTimeInMillis;
+                restTimer();
+                }
+                else if (totalTimeLeftInMillis < focusingTimeInMillis){
+                    mTimeLeftInMillis = totalTimeLeftInMillis;
+                    restTimer();
+                } else{
+                    mButtonStartPauseSkip.setText("Start");
+                    mButtonStartPauseSkip.setVisibility(View.INVISIBLE);
+                    statusView.setVisibility(View.INVISIBLE);
+                    mTextViewCountDown.setTextSize(30);
+                    mTextViewCountDown.setText("Congratulations! Please press back to the calendar");
+                }
+
             }
         }.start();
 
         pomodoro.turnOn();
-        mButtonStartPause.setText("pause");
-        mButtonReset.setVisibility(View.INVISIBLE);
+        statusView.setText("focusing");
+        mButtonStartPauseSkip.setText("pause");
+
+    }
+
+    private void restTimer(){
+        CountDownTimer restTimer = new CountDownTimer(restTimeInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                updateCountDownText((int) millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                startTimer();
+
+            }
+        }.start();
+        statusView.setText("resting");
+        mButtonStartPauseSkip.setText("skip");
 
     }
 
@@ -96,33 +134,23 @@ public class PomodoroActivity extends AppCompatActivity {
     private void pauseTimer() {
         mCountDownTimer.cancel();
         pomodoro.turnOff();
-        mButtonStartPause.setText("Start");
-        mButtonReset.setVisibility(View.VISIBLE);
+        mButtonStartPauseSkip.setText("Start");
 
     }
 
-    /**
-     * Reset the Pomodoro Timer.
-     */
-    private void resetTimer() {
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
-        updateCountDownText();
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
-
-    }
 
     /**
      * Update the time displayed in the Pomodoro Timer.
      */
-    private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+    private void updateCountDownText(int mTimeLeftInMillis) {
+        int minutes = (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (mTimeLeftInMillis / 1000) % 60;
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         mTextViewCountDown.setText(timeLeftFormatted);
 
     }
+
 }
 

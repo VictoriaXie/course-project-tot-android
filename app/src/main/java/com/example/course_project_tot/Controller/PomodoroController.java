@@ -17,5 +17,13 @@ public class PomodoroController {
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
     }
+
+    public Button getmButtonStartPause(){
+        return this.mButtonStartPause;
+    }
+
+    public Button getmButtonReset(){
+        return this.mButtonReset;
+    }
 }
 

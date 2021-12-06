@@ -17,6 +17,8 @@ public class CalendarActivity extends AppCompatActivity {
     private LocalDate curDate;
 
     private LinearLayout scrollLinearLayout;
+    private Button find;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,11 @@ public class CalendarActivity extends AppCompatActivity {
                 curDate = LocalDate.of(year, month, day);
                 updateGoals(curDate);
             }
+        });
+        find = (Button) findViewById(R.id.button2);
+        find.setOnClickListener(view -> {
+            Intent intent = new Intent(CalendarActivity.this, ChartActivity.class);
+            startActivity(intent);
         });
     }
 

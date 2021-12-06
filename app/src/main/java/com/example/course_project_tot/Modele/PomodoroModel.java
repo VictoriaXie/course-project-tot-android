@@ -6,6 +6,7 @@ public class PomodoroModel {
     private final int restingTime;
     private final int totalTime;
     private boolean mTimerRunning;
+    private boolean isResting;
 
     /**
      * Construct the PomodoroModel
@@ -18,12 +19,14 @@ public class PomodoroModel {
         this.focusingTime = focusingTime;
         this.restingTime = restingTime;
         this.totalTime = totalTime;
+        isResting = false;
     }
 
     public PomodoroModel(int totalTime){
         this.focusingTime = 25;
         this.restingTime = 5;
         this.totalTime = totalTime;
+        isResting = false;
     }
 
     /**
@@ -45,6 +48,7 @@ public class PomodoroModel {
      */
     public void turnOn(){
         mTimerRunning = true;
+        this.isResting = false;
     }
 
     /**
@@ -53,6 +57,7 @@ public class PomodoroModel {
 
     public void turnOff(){
         mTimerRunning = false;
+        this.isResting = false;
     }
 
     /**
@@ -62,5 +67,10 @@ public class PomodoroModel {
     public boolean getStatus(){
         return mTimerRunning;
     }
+
+    public void rest(){ this.isResting = true;}
+
+    public boolean getResting(){ return isResting;}
+
 
 }
