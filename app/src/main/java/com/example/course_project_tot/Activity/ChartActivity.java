@@ -3,6 +3,7 @@ package com.example.course_project_tot.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +15,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 
 public class ChartActivity extends AppCompatActivity {
-
+    private Button find;
     // creating a variable
     // for our graph view.
     GraphView graphView;
@@ -22,6 +23,7 @@ public class ChartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         graphView = findViewById(R.id.idGraphView);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
@@ -41,6 +43,11 @@ public class ChartActivity extends AppCompatActivity {
         // on below line we are adding
         // data series to our graph view.
         graphView.addSeries(series);
+        find = (Button) findViewById(R.id.button2);
+        find.setOnClickListener(view -> {
+            Intent intent = new Intent(ChartActivity.this, CalendarActivity.class);
+            startActivity(intent);
+        });
 
      }
 

@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.course_project_tot.Activity.CalendarActivity;
 import com.example.course_project_tot.Controller.ILoginController;
 import com.example.course_project_tot.Controller.LoginController;
 import com.example.course_project_tot.R;
