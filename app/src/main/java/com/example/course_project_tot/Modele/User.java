@@ -7,6 +7,7 @@ import com.example.course_project_tot.Goal;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class User implements IUser, Serializable {
     private final String email;
     private final String password;
-    public Map<LocalDate, List<Goal>> goals;
+    public Map<String, Goal> goalsById;
     /**
      * Setup the user's email, password and their goals.
      *
@@ -22,7 +23,7 @@ public class User implements IUser, Serializable {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.goals = new HashMap<>();
+        this.goalsById = new HashMap<>();
     }
 
     @Override
@@ -33,6 +34,20 @@ public class User implements IUser, Serializable {
 
     @Override
     public String getPassword() { return password;
+    }
+
+    public List<Goal> getGoalsByDate(LocalDate date) {
+        List<Goal> goals = new ArrayList<>();
+        for (Goal goal : goalsById.values()) {
+            if (goal.getDate().equals(date)) {
+                goals.add(goal);
+            }
+        }
+        return goals;
+    }
+
+    public void addGoal(Goal goal) {
+        goalsById.put(goal.getId(), goal);
     }
 
     @Override
