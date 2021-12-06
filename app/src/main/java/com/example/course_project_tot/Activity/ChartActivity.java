@@ -1,6 +1,8 @@
 package com.example.course_project_tot.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,5 +41,7 @@ public class ChartActivity extends AppCompatActivity {
         // on below line we are adding
         // data series to our graph view.
         graphView.addSeries(series);
+
     }
+
 }
