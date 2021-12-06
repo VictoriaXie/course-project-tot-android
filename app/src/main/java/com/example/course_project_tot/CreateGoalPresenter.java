@@ -36,6 +36,7 @@ public class CreateGoalPresenter {
 
         User currentUser = UserList.getInstance().getCurrentUser();
         currentUser.addGoal(goal);
+        UserList.getInstance().writeToFile();
     }
 
     public interface View {

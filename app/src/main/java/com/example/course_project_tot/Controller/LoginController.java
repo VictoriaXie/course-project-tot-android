@@ -6,7 +6,6 @@ import com.example.course_project_tot.View.ILoginView;
 
 public class LoginController implements ILoginController {
     ILoginView loginView;
-    public static User activeUser;
 
     public LoginController(ILoginView loginView){
         this.loginView = loginView;
@@ -18,7 +17,7 @@ public class LoginController implements ILoginController {
             User user = UserList.getInstance().getUser(email);
             if (user.getPassword().equals(password)) {
                 loginView.OnLoginSuccess("Successfully logged in.");
-                activeUser = user;
+                UserList.getInstance().setCurrentUser(user);
             } else {
                 loginView.OnLoginError("Incorrect password.");
             }
@@ -34,7 +33,7 @@ public class LoginController implements ILoginController {
             } else if (loginCode == 3) {
                 loginView.OnLoginError("Please enter Password greater the 12 char");
             } else {
-                activeUser = user;
+                UserList.getInstance().setCurrentUser(user);
                 UserList.getInstance().add(user);
                 UserList.getInstance().writeToFile();
                 loginView.OnLoginSuccess("Registration Successful");

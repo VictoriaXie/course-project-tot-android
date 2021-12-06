@@ -3,6 +3,7 @@ package com.example.course_project_tot.Modele;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,8 @@ public class UserList {
                 try {
                     Gson gson = new Gson();
                     JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
-                    users = gson.fromJson(reader, HashMap.class);
+                    Type type = new TypeToken<Map<String, User>>() {}.getType(); // Makes sure json is deserialized as a map with User and not generic objects
+                    users = gson.fromJson(reader, type);
                 } catch (IOException e) {
                     // Should never happen, we already checked the file exists
                     throw new RuntimeException(e);
@@ -77,7 +80,8 @@ public class UserList {
         try {
             Gson gson = new Gson();
             JsonWriter writer = new JsonWriter(new FileWriter(FILE_PATH));
-            gson.toJson(users, HashMap.class, writer);
+
+            gson.toJson(users, Map.class, writer);
             writer.flush();
             writer.close();
         } catch (IOException e) {
