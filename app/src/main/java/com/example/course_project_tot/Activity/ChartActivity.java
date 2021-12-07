@@ -23,13 +23,22 @@ public class ChartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_chart);
 
         graphView = findViewById(R.id.idGraphView);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        for (DataPoint d : FromJSon.returnFromJson()) {
-            series.appendData(d, true, 30);
-        }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                // on below line we are adding
+                // each point on our x and y axis.
+                new DataPoint(0, 1),
+                new DataPoint(1, 3),
+                new DataPoint(2, 4),
+                new DataPoint(3, 9),
+                new DataPoint(4, 6),
+                new DataPoint(5, 3),
+                new DataPoint(6, 6),
+                new DataPoint(7, 1),
+                new DataPoint(8, 2)
+        });
 
 
         graphView.setTitle("My Graph View");
