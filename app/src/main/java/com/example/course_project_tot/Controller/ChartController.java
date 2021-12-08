@@ -15,22 +15,19 @@ public class ChartController {
     public ChartController() {
         this.series = new LineGraphSeries<>();
     }
-    public LineGraphSeries<DataPoint> getSeries(){
+    public LineGraphSeries<DataPoint> getSeries(LocalDate date){
         User user = UserList.getInstance().getCurrentUser();
-        for(LocalDate date = LocalDate.of(2021, 01, 01);
-            date.isBefore(LocalDate.of(2022, 01, 01));
-            date = date.plusDays(1)){
-            int a = date.getDayOfMonth();int b = date.getMonthValue();
-            int value = 100*a + b;
+        for(int day =0; day < 31; day++){
+
             int time = 0;
             if(! user.getGoalsByDate(date).isEmpty()) {
                 for(int i = 0; i < user.getGoalsByDate(date).size(); i++){
                     time += user.getGoalsByDate(date).get(i).getTimeRequired();
                 }
             }
-
-            DataPoint point = new DataPoint(value,time);
-            this.series.appendData(point, false, 24);
+            DataPoint point = new DataPoint(day,time);
+            this.series.appendData(point, true, 30);
+            date = date.plusDays(1);
         }
 
         return this.series;
