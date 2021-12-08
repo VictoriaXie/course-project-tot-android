@@ -14,11 +14,15 @@ import java.time.LocalDate;
 
 
 public class ChartActivity extends AppCompatActivity {
-    private Button find;
     // creating a variable
     // for our graph view.
     GraphView graphView1;
     GraphView graphView2;
+
+    /**
+     * create line chart and bar chart to show the daily goal accomplishment of the current user.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
