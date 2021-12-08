@@ -6,13 +6,10 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.course_project_tot.CalendarPresenter;
-import com.example.course_project_tot.Controller.LoginController;
-import com.example.course_project_tot.Goal;
+import com.example.course_project_tot.View.CalendarPresenter;
 import com.example.course_project_tot.R;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity implements CalendarPresenter.View {
     private CalendarPresenter presenter;
