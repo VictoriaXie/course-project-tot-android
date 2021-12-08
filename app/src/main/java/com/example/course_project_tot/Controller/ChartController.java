@@ -15,6 +15,17 @@ public abstract class ChartController {
 
     public ChartController() {
 
+        this.series = new BaseSeries<DataPoint>() {
+            @Override
+            public void drawSelection(GraphView mGraphView, Canvas canvas, boolean b, DataPointInterface value) {
+
+            }
+
+            @Override
+            public void draw(GraphView graphView, Canvas canvas, boolean isSecondScale) {
+
+            }
+        };
     }
     public BaseSeries<DataPoint> getSeries(LocalDate date){
         return this.series;
