@@ -3,6 +3,7 @@ package com.example.course_project_tot.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.course_project_tot.Controller.PomodoroController;
 import com.example.course_project_tot.R;
 import com.example.course_project_tot.Modele.PomodoroModel;
 
@@ -21,14 +23,14 @@ public class PomodoroActivity extends AppCompatActivity {
     private TextView mTextViewCountDown;
     private TextView statusView;
     private Button mButtonStartPauseSkip;
-    private MediaPlayer mysong;
+    private MediaPlayer mySong;
 
     private CountDownTimer mCountDownTimer;
 
-    private final PomodoroModel pomodoro = new PomodoroModel(1,1,2);
+    private final PomodoroModel pomodoro = new PomodoroModel(60);
     private int totalTimeLeftInMillis = pomodoro.getTotalTime() * 60000;
-    private int focusingTimeInMillis = pomodoro.getFocusingTime() * 60000;
-    private int restTimeInMillis = pomodoro.getRestingTime() * 60000;
+    private final int focusingTimeInMillis = pomodoro.getFocusingTime() * 60000;
+    private final int restTimeInMillis = pomodoro.getRestingTime() * 60000;
 
     private int mTimeLeftInMillis = focusingTimeInMillis;
 
@@ -45,11 +47,12 @@ public class PomodoroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
         
-        mysong = MediaPlayer.create(PomodoroActivity.this,R.raw.relaxing);
+        mySong = MediaPlayer.create(PomodoroActivity.this,R.raw.relaxing);
         mTextViewCountDown = findViewById(R.id.textView_view_countdown);
         statusView = findViewById(R.id.textView_status);
         mButtonStartPauseSkip = findViewById(R.id.button_start_pause);
         Button mButtonBack = findViewById(R.id.button_back);
+        PomodoroController controller = new PomodoroController(this);
 
         mButtonStartPauseSkip.setOnClickListener(view -> {
             if (pomodoro.getStatus()) {
@@ -64,15 +67,20 @@ public class PomodoroActivity extends AppCompatActivity {
         mButtonBack.setOnClickListener(view -> BackToCalendar());
     }
 
+    /**
+     * End the music when the user left.
+     */
     @Override
     protected void onPause() {
         super.onPause();
-        mysong.release();
+        mySong.release();
     }
+    /**
+     * Start playing the music
+     */
 
     public void playIT(View v){
-        mysong.start();
-
+        mySong.start();
     }
 
     /**
@@ -86,6 +94,7 @@ public class PomodoroActivity extends AppCompatActivity {
     /**
      * Start the Pomodoro Timer.
      */
+    @SuppressLint("SetTextI18n")
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -94,6 +103,7 @@ public class PomodoroActivity extends AppCompatActivity {
                 updateCountDownText(mTimeLeftInMillis);
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onFinish() {
                 pomodoro.turnOff();
@@ -122,6 +132,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void restTimer(){
         CountDownTimer restTimer = new CountDownTimer(restTimeInMillis, 1000) {
             @Override
@@ -143,6 +154,7 @@ public class PomodoroActivity extends AppCompatActivity {
     /**
      * Pause the Pomodoro Timer.
      */
+    @SuppressLint("SetTextI18n")
     private void pauseTimer() {
         mCountDownTimer.cancel();
         pomodoro.turnOff();
