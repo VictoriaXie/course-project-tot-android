@@ -33,7 +33,5 @@ public class LineChartController extends ChartController {
         return this.series;
     }
 
-
-
 }
 
