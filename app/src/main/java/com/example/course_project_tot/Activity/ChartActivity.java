@@ -5,11 +5,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.course_project_tot.Controller.ChartController;
+import com.example.course_project_tot.Controller.LineChartController;
+import com.example.course_project_tot.Controller.BarChartController;
 import com.example.course_project_tot.R;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.time.LocalDate;
 
@@ -18,29 +17,37 @@ public class ChartActivity extends AppCompatActivity {
     private Button find;
     // creating a variable
     // for our graph view.
-    GraphView graphView;
-
+    GraphView graphView1;
+    GraphView graphView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
-        graphView = findViewById(R.id.idGraphView);
+        graphView1 = findViewById(R.id.idGraphView1);
+
+        graphView1.setTitle("30days Accomplishment Line Chart");
+
+        graphView1.setTitleColor(R.color.purple_200);
+
+        graphView1.setTitleTextSize(70);
+        // on below line we are adding
+        // data series to our line graph view.
+        LineChartController series1 = new LineChartController();
+        graphView1.addSeries(series1.getSeries(LocalDate.now().minusDays(30)));
 
 
-        graphView.setTitle("30days Accomplishment Line Chart");
+        graphView2 = findViewById(R.id.idGraphView2);
 
+        graphView2.setTitle("30days Accomplishment Bar Chart");
 
-        graphView.setTitleColor(R.color.purple_200);
+        graphView2.setTitleColor(R.color.purple_200);
 
-
-        graphView.setTitleTextSize(70);
-
+        graphView2.setTitleTextSize(70);
         // on below line we are adding
         // data series to our graph view.
-        ChartController series = new ChartController();
-        graphView.addSeries(series.getSeries(LocalDate.now().minusDays(30)));
-
+        BarChartController series2 = new BarChartController();
+        graphView2.addSeries(series2.getSeries(LocalDate.now().minusDays(30)));
      }
 
 }
