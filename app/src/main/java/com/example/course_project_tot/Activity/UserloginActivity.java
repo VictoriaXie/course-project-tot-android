@@ -21,9 +21,6 @@ public class UserloginActivity extends AppCompatActivity  implements ILoginView 
     /**
      * Setup the view and display on android app for User login part.
      *
-     * Once the Timer starts counting down, the start button will be invisible and the pause button
-     * will appear, and we can pause the Timer by clicking the Pause button.
-     * Reset the Timer by clicking the reset button.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +31,22 @@ public class UserloginActivity extends AppCompatActivity  implements ILoginView 
         loginb = (Button) findViewById(R.id.loginb);
         loginPresenter = new LoginController(this);
         loginb.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click listener for "login" button and then it will check whether the username and
+             * password are valid or not.
+             * @param v Object that triggered the event.
+             */
             @Override
             public void onClick(View v) {
                 loginPresenter.OnLogin(email.getText().toString().trim(),password.getText().toString().trim());
             }
         });
     }
+
+    /**
+     * Display a success message and moves to the create goal activity.
+     * @param message
+     */
     @Override
     public void OnLoginSuccess(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();

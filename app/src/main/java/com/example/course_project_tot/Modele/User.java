@@ -18,7 +18,8 @@ public class User implements IUser, Serializable {
     public Map<String, Goal> goalsById;
     /**
      * Setup the user's email, password and their goals.
-     *
+     * @param email
+     * @param password
      */
     public User(String email, String password) {
         this.email = email;
@@ -26,14 +27,21 @@ public class User implements IUser, Serializable {
         this.goalsById = new HashMap<>();
     }
 
+    /**
+     * @return user's email address
+     */
     @Override
     public String getEmail() {
 
         return email;
     }
 
+    /**
+     * @return user's password
+     */
     @Override
-    public String getPassword() { return password;
+    public String getPassword() {
+        return password;
     }
 
     public List<Goal> getGoalsByDate(LocalDate date) {
