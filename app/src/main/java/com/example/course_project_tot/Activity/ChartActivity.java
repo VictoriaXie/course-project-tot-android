@@ -11,6 +11,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.time.LocalDate;
+
 
 public class ChartActivity extends AppCompatActivity {
     private Button find;
@@ -26,7 +28,7 @@ public class ChartActivity extends AppCompatActivity {
         graphView = findViewById(R.id.idGraphView);
 
 
-        graphView.setTitle("2021 Accomplishment Line Chart");
+        graphView.setTitle("30days Accomplishment Line Chart");
 
 
         graphView.setTitleColor(R.color.purple_200);
@@ -37,7 +39,7 @@ public class ChartActivity extends AppCompatActivity {
         // on below line we are adding
         // data series to our graph view.
         ChartController series = new ChartController();
-        graphView.addSeries(series.getSeries());
+        graphView.addSeries(series.getSeries(LocalDate.now().minusDays(30)));
 
      }
 
