@@ -14,7 +14,6 @@ import java.time.LocalDate;
 
 
 public class ChartActivity extends AppCompatActivity {
-    private Button find;
     // creating a variable
     // for our graph view.
     GraphView graphView1;
