@@ -68,8 +68,16 @@ public class PomodoroModel {
         return mTimerRunning;
     }
 
+
+    /**
+     * Set the timer in the resting state.
+     */
     public void rest(){ this.isResting = true;}
 
+    /**
+     * Return the state of the Pomodoro Timer (Whether it's resting or not).
+     @return True if the timer is in resting state.
+     */
     public boolean getResting(){ return isResting;}
 
 

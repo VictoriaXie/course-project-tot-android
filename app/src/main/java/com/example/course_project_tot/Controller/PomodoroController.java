@@ -1,29 +1,15 @@
 package com.example.course_project_tot.Controller;
 
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
+import com.example.course_project_tot.Activity.PomodoroActivity;
+import com.example.course_project_tot.Modele.PomodoroModel;
 
 public class PomodoroController {
-    private Button mButtonStartPause;
-    private Button mButtonReset;
+    private final PomodoroModel pomodoro = new PomodoroModel(60);
 
-    public PomodoroController(Button mButtonStartPause, Button mButtonReset){
-        this.mButtonStartPause = mButtonStartPause;
-        this.mButtonReset = mButtonReset;
+    public PomodoroController(PomodoroActivity view){
     }
 
-    public void resetTimer(){
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
-    }
 
-    public Button getmButtonStartPause(){
-        return this.mButtonStartPause;
-    }
-
-    public Button getmButtonReset(){
-        return this.mButtonReset;
-    }
 }
 
