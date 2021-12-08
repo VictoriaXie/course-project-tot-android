@@ -1,6 +1,8 @@
-package com.example.course_project_tot;
+package com.example.course_project_tot.View;
 
 import android.widget.EditText;
+
+import com.example.course_project_tot.Goal;
 import com.example.course_project_tot.Modele.User;
 import com.example.course_project_tot.Modele.UserList;
 
