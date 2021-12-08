@@ -1,8 +1,6 @@
 package com.example.course_project_tot.View;
 
-import android.content.Context;
-import com.example.course_project_tot.Controller.LoginController;
-import com.example.course_project_tot.Goal;
+import com.example.course_project_tot.Modele.Goal;
 import com.example.course_project_tot.Modele.User;
 import com.example.course_project_tot.Modele.UserList;
 

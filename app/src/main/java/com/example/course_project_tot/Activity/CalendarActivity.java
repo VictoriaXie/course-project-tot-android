@@ -26,7 +26,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPrese
         presenter = new CalendarPresenter(this);
 
         CalendarView calendarView = findViewById(R.id.calendarView);
-        Button createGoalButton = findViewById(R.id.createGoalButton);
         scrollLinearLayout = findViewById(R.id.ll);
         curDate = LocalDate.now();
 
