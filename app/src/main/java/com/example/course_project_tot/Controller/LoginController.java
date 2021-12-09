@@ -15,8 +15,8 @@ public class LoginController implements ILoginController {
     /**
      * Display different message on the screen based on the result returned from 'is_valid' method.
      *
-     * @param email
-     * @param password
+     * @param email user's email address
+     * @param password user's password
      */
     @Override
     public void OnLogin(String email, String password) {

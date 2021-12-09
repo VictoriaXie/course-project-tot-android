@@ -18,8 +18,8 @@ public class User implements IUser, Serializable {
     public Map<String, Goal> goalsById;
     /**
      * Setup the user's email, password and their goals.
-     * @param email
-     * @param password
+     * @param email user's email address
+     * @param password user's password
      */
     public User(String email, String password) {
         this.email = email;
