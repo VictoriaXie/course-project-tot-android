@@ -45,7 +45,7 @@ public class UserloginActivity extends AppCompatActivity  implements ILoginView 
 
     /**
      * Display a success message and moves to the create goal activity.
-     * @param message
+     * @param message a message shows whether logs in successful or not.
      */
     @Override
     public void OnLoginSuccess(String message) {
