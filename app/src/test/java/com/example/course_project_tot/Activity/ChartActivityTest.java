@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 
 import com.google.gson.Gson;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,12 +12,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 
 public class ChartActivityTest extends TestCase {
     List<DataPoint> items;
     @Before
-    public void main(String[] args) throws IOException {
+    public void main() throws IOException {
 
         String fileName = "src/main/resources/items.json";
 
@@ -28,9 +26,9 @@ public class ChartActivityTest extends TestCase {
 
             Gson gson = new Gson();
 
-            DataPoint item1 = new DataPoint(0102, 4);
-            DataPoint item2 = new DataPoint(0103, 5);
-            DataPoint item3 = new DataPoint(0104, 1);
+            DataPoint item1 = new DataPoint(66, 4);
+            DataPoint item2 = new DataPoint(67, 5);
+            DataPoint item3 = new DataPoint(68, 1);
 
             this.items.add(item1);
             this.items.add(item2);
@@ -40,12 +38,4 @@ public class ChartActivityTest extends TestCase {
         }
     }
 
-    @Test
-    void getChartActivity() {
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        for (DataPoint d : FromJSon.returnFromJson()) {
-            series.appendData(d, true, 30);
-        }
-        assertEquals(this.items, series);
-    }
 }
