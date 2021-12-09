@@ -56,6 +56,10 @@ public class User implements IUser, Serializable {
         goalsById.put(goal.getId(), goal);
     }
 
+    /**
+     *
+     * @return 0, 1 or 2 based on checking the user's email address and password.
+     */
     @Override
     public int isValid() {
         // 0. Check for Email Empty
