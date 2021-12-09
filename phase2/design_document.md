@@ -5,7 +5,6 @@
 Classes were designed such that each class has only one responsibility. For instance, the UserModel class gets changed only when we need to change the rule of setting user name or their login password (ex: change the password length requirement to at least 12 characters instead of 8), and it won’t affect other classes.
 We are using MVC architecture to ensure that each class follows the Single responsibility principle. For instance, we have four controller classes, and for each controller class, we only have one corresponding UI class, so the only reason to change the controller class is when we make changes to the corresponding UI class.
 
-
 #The Open–closed principle
 
 Classes were written such that they are easy to extend. For instance, the PomodoroController class is open for adding extensions in order to make the timer have more functions, such as adding a function which allows the user to set up a break period between activities. We did not disobey the closed for modification principle. We might make the goal class be an abstract class, and have academic goal and everydayLife goal as its subclass. If we have a method which allows us to add goals into a goal list, then we don’t need to rewrite the ‘addGoal’ method for each academic goal class and everydayLife goal class. This is an example of closed for modification.
