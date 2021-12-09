@@ -12,6 +12,12 @@ public class LoginController implements ILoginController {
         this.loginView = loginView;
     }
 
+    /**
+     * Display different message on the screen based on the result returned from 'is_valid' method.
+     *
+     * @param email
+     * @param password
+     */
     @Override
     public void OnLogin(String email, String password) {
         if (UserList.getInstance().contains(email)) {
