@@ -2,7 +2,7 @@
 
 #The Single-responsibility principle
 
-Classes were designed such that each only has one responsibility. For instance, the UserModel class gets changed only when we need to change the rule of setting user name or their login password (ex: change the password length requirement to at least 12 characters instead of 8), and it won’t affect other classes.
+Classes were designed such that each class has only one responsibility. For instance, the UserModel class gets changed only when we need to change the rule of setting user name or their login password (ex: change the password length requirement to at least 12 characters instead of 8), and it won’t affect other classes.
 We are using MVC architecture to ensure that each class follows the Single responsibility principle. For instance, we have four controller classes, and for each controller class, we only have one corresponding UI class, so the only reason to change the controller class is when we make changes to the corresponding UI class.
 
 
@@ -14,7 +14,7 @@ Classes were written such that they are easy to extend. For instance, the Pomodo
 
 In Stats part, we have an abstract class called ‘ChartController’, and its subclasses ‘barchartController’ and ‘linechartController’ implement all methods in their superclass which is ‘ChartController’. Therefore, we can say ‘barchartController’ and ‘linechartController’ are subtypes of  ‘ChartController’, and they satisfy all properties contained in the super class.
 
-The Interface segregation principle
+#The Interface segregation principle
 The interfaces we created are quite small thereby allowing them to be fully used by the classes. For example getStatus just has the methods to get the status of the pomodoro timer and nothing else. This makes our interfaces easy to understand and none of the concrete classes are forced to implement any unnecessary methods.
 
 #Dependency Inversion:
@@ -60,10 +60,20 @@ Code Style and Documentation:
 
 We did not pay much attention to fixing warnings, using java doc and using the pull request before. But when we worked on phase 2, we ensured that code warnings are resolved and documented most of the methods, especially those that are not clear on what they do at first glance. The methods that are not documented were the methods we felt had sufficient explanation in their names, such as getters and setters.
 
+##Refactoring:
+
+From pull request #29, we realized it is no need for us to use json for statistics part, because the only data we need for statistics part is from a current user instead of data of users in the whole user list. So we call the current user from user by adding the controller and delete the fromJson class:
+- LineChartController: get the current user data and return the series of datapoints for the chart activity in the last 30 days. We add a parameter for the method getSeries and add it in line chart Activity for more flexible use.
+  After adding the controller, there is a line chart showing when we click the button stats with the 30 days data. While we think it needs more extension for further use, so we add a abstract class for line chart controller, which allows us implement different type of charts in the future. Thus, we had pull request #30:
+- ChartController: an abstract class for all kinds of charts with a method getSeries and a private instance with BaseSeries type.
+- BarChartController: get current user data and return series data points for the chart activity in the last 30 days.
+  And then we added views in the chart activity to show both two charts in the same page. And it can add other charts.
+  In addition, we have some general refactoring that put unclassified classed into Activity, Module, Controller and View for parts in order to following the MVC module. For the code smell, the library we choose for statistics is too small to use, so we cannot choose other type of charts like pie chart for better looking. In addition, we do not use regular expression for create goal part, if user create a alphabet in the number of hour space, we cannot work with it.
+
 ##Testing:
 We did not do a good job in phase1 for this part. Most of the components were not tested. When we write tests we found that most of the cases are not hard to test since we have followed the clean architecture which makes sure that all of our classes are decoupled. Many of the classes rely on other classes through interfaces. So we just used the Junit test to test them. But we didn’t test all cases, for example we did not test getters and setters for all model classes, since these testings are trivial to test.
 
-Code Organization:
+##Code Organization:
 In phase 0, we organized our code by components(Calendar, Pomodoro Timer, Users, Stats). However, as all of us decided to use the MVC model, we found that packaging by features becomes confusing. So we repackaged our code in 4 packages: Model, View, Controller, and Activity. This helps us follow clean architecture closely. Moreover, when we need to 
 
 ## Work Distribution:
