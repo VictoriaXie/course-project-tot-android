@@ -61,7 +61,13 @@ Code Style and Documentation:
 We did not pay much attention to fixing warnings, using java doc and using the pull request before. But when we worked on phase 2, we ensured that code warnings are resolved and documented most of the methods, especially those that are not clear on what they do at first glance. The methods that are not documented were the methods we felt had sufficient explanation in their names, such as getters and setters.
 
 ##Testing:
-We didn’t do a good job in phase1 for this part. Most of the components were not tested. When we write tests we found that most of the cases are not hard to test since we have followed the clean architecture which makes sure that all of our classes are decoupled. Many of the classes rely on other classes through interfaces. So we just used the Junit test to test them. But we didn’t test all cases, for example we did not test getters and setters for all model classes, since these testings are trivial to test.
+We did not do a good job in phase1 for this part. Most of the components were not tested. When we write tests we found that most of the cases are not hard to test since we have followed the clean architecture which makes sure that all of our classes are decoupled. Many of the classes rely on other classes through interfaces. So we just used the Junit test to test them. But we didn’t test all cases, for example we did not test getters and setters for all model classes, since these testings are trivial to test.
 
 Code Organization:
 In phase 0, we organized our code by components(Calendar, Pomodoro Timer, Users, Stats). However, as all of us decided to use the MVC model, we found that packaging by features becomes confusing. So we repackaged our code in 4 packages: Model, View, Controller, and Activity. This helps us follow clean architecture closely. Moreover, when we need to 
+
+## Work Distribution:
+Shuyang Qiu: is responsible for the Calendar part and the goal part.
+Yushan Xie: is responsible for the user part and work on goal part with Shuyang. Also responsible the paper work such as design documentation.
+Boyu Zhu: is responsible for the pomodoro part.
+Yihang Luo: is responsible for the Stats part. 
