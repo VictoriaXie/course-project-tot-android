@@ -20,7 +20,7 @@ import java.util.Map;
 public class UserList {
     private static UserList instance;
 
-    private static final File FILE_PATH = new File("data/user/0/com.example.course_project_tot/files/users.json");
+    private static File file;
 
     @Expose private static Map<String, User> users;
     private static User currentUser;
@@ -33,20 +33,23 @@ public class UserList {
     public static UserList getInstance() {
         if (instance == null) {
             instance = new UserList();
-            if (FILE_PATH.exists()) { // Reads users from file if it exists
-                try {
-                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                            .create();
-                    JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
-                    Type type = new TypeToken<Map<String, User>>() {}.getType(); // Makes sure json is deserialized as a map with User and not generic objects
-                    users = gson.fromJson(reader, type);
-                } catch (IOException e) {
-                    // Should never happen, we already checked the file exists
-                    throw new RuntimeException(e);
-                }
-            }
         }
         return instance;
+    }
+
+    public static void readFromFile() {
+        if (file.exists()) { // Reads users from file if it exists
+            try {
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                        .create();
+                JsonReader reader = new JsonReader(new FileReader(file));
+                Type type = new TypeToken<Map<String, User>>() {}.getType(); // Makes sure json is deserialized as a map with User and not generic objects
+                users = gson.fromJson(reader, type);
+            } catch (IOException e) {
+                // Should never happen, we already checked the file exists
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -79,11 +82,15 @@ public class UserList {
         return currentUser;
     }
 
+    public void setFile(File file) {
+        UserList.file = file;
+    }
+
     public void writeToFile() {
         try {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                     .create();
-            JsonWriter writer = new JsonWriter(new FileWriter(FILE_PATH));
+            JsonWriter writer = new JsonWriter(new FileWriter(file));
 
             gson.toJson(users, Map.class, writer);
             writer.flush();

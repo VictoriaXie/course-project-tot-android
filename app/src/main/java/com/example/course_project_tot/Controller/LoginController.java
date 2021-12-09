@@ -4,12 +4,15 @@ import com.example.course_project_tot.Modele.User;
 import com.example.course_project_tot.Modele.UserList;
 import com.example.course_project_tot.View.ILoginView;
 
+import java.io.File;
+
 public class LoginController implements ILoginController {
     ILoginView loginView;
 
     public LoginController(ILoginView loginView){
-
         this.loginView = loginView;
+        UserList.getInstance().setFile(new File(loginView.getFilesDir(), "user.json"));
+        UserList.readFromFile();
     }
 
     @Override
