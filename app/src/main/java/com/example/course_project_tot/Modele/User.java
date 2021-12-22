@@ -39,6 +39,7 @@ public class User implements IUser, Serializable {
      */
     @Override
     public String getPassword() {
+
         return password;
     }
 
